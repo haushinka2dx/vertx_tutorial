@@ -1,4 +1,5 @@
 load('vertx.js');
+load('time_service.js');
 
 var webServerConf = {
 	port : 8080,
@@ -28,6 +29,10 @@ var webServerConf = {
 				action : 'save',
 				collection : 'orders'
 			}
+		},
+		// Allow calls timeService API
+		{
+			address : 'acme.timeService',
 		}
 	],
 	outbound_permitted : [ {} ]
@@ -42,4 +47,4 @@ vertx.deployModule('vertx.mongo-persistor-v1.2', null, 1, function() {
 vertx.deployModule('vertx.auth-mgr-v1.1');
 
 // Start the web server, with the config we defined above
-vertx.deployModule('vertx.web-server-v1.0', webServerConf);
+vertx.deployModule('vertx.web-server-v1.0', webServerConf, 8);

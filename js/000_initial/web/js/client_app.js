@@ -22,6 +22,12 @@
 
   eb.onopen = function() {
 
+	// Get the server time.
+
+    eb.send("acme.timeService", {message: "dummy"}, function(reply) {
+    	console.log("Time is " + reply.current_time);
+    });
+
     // Get the static data
 
     eb.send('vertx.mongopersistor', {action: 'find', collection: 'albums', matcher: {} },
