@@ -3,6 +3,7 @@ load('vertx.js');
 var webServerConf = {
 	port : 8080,
 	host : 'localhost',
+	ssl : true,
 	bridge : true,
 
 	// This defines which messages from the client we will let throught
