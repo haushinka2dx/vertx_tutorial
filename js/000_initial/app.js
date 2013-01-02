@@ -1,8 +1,20 @@
 load('vertx.js');
 
 var webServerConf = {
-	port: 8080,
-	host: 'localhost'
+	port : 8080,
+	host : 'localhost',
+	bridge : true,
+
+	inbound_permitted : [
+		{
+			address : 'vertx.mongopersistor',
+			match : {
+				action : 'find',
+				collection : 'albums'
+			}
+		}
+	],
+	outbound_permitted : [ {} ]
 };
 
 // Start a MongoDB persistor module
