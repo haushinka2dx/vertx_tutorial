@@ -18,7 +18,9 @@ var webServerConf = {
 };
 
 // Start a MongoDB persistor module
-vertx.deployModule('vertx.mongo-persistor-v1.2');
+vertx.deployModule('vertx.mongo-persistor-v1.2', null, 1, function() {
+	load('static_data.js');
+});
 
 // Start the web server, with the config we defined above
 vertx.deployModule('vertx.web-server-v1.0', webServerConf);
