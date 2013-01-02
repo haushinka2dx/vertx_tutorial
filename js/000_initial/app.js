@@ -5,16 +5,27 @@ var webServerConf = {
 	host : 'localhost',
 	bridge : true,
 
+	// This defines which messages from the client we will let throught
+	// from the client
 	inbound_permitted : [
 		// Allow calls to login and authorize
 		{
 			address : 'vertx.basicauthmanager.login'
 		},
+		// Allow calls to get static album data from the persistor
 		{
 			address : 'vertx.mongopersistor',
 			match : {
 				action : 'find',
 				collection : 'albums'
+			}
+		},
+		{
+			address : 'vertx.mongopersistor',
+			requires_auth : true, // User must be logged in to send let these through
+			match : {
+				action : 'save',
+				collection : 'orders'
 			}
 		}
 	],
